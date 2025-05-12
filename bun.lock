@@ -4,6 +4,7 @@
     "": {
       "name": "project",
       "dependencies": {
+        "framer-motion": "^12.11.0",
         "motion": "^12.11.0",
         "next": "15.3.2",
         "react": "^19.0.0",
