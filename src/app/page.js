@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className={styles.title}>
       <AnimatedText once text="Louisa Yonzon" el="p" />
-      <p>Web Developer</p>
+      <AnimatedText once text="Web Developer" el="p" />
     </div>
   );
 }
