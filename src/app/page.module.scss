@@ -1,3 +1,4 @@
+
 .page {
   height: 100vh;
   display: flex;
@@ -25,3 +26,35 @@
 .textSpan {
   display: inline-block;
 }
+
+/* nav bar css */
+
+.nav {
+  margin: 20px;
+  justify-content: space-between;
+  
+}
+
+.pages {
+  margin-top: 10px;
+  gap: 20px;
+}
+
+
+
+
+.nav, .pages {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-family: 'Marny', sans-serif;
+  font-size: 40px;
+}
+
+
+
+
