@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.scss";
+import Navigation from "./component/Navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.png" sizes="any" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        this will be the nav bar
+        <Navigation />
         {children}
       </body>
     </html>
