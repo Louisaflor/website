@@ -12,6 +12,9 @@ export default function Home() {
         </div>
         <p className={styles.scrollDown} >Scroll down to continue</p>
       </section>
+      <section>
+        welcome to my website it's nice to meet you!
+      </section>
      
     </div>
   );

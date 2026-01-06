@@ -3,6 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  scroll-snap-align: start;
 }
 
 .title {
@@ -37,7 +38,13 @@
 
 .pages {
   margin-top: 10px;
+  margin-right: 10px;
   gap: 20px;
+}
+
+.pages span {
+  cursor: pointer;
+  font-size: 22px;
 }
 
 
