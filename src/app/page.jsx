@@ -38,12 +38,14 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  // split scroll into 2 phases
-  const section1Opacity = useTransform(servicesProgress, [0, 0.4], [1, 0]);
-  const section2Opacity = useTransform(servicesProgress, [0.4, 1], [0, 1]);
+  // smoother overlapping transitions
+const section1Opacity = useTransform(servicesProgress, [0, 0.3, 0.4], [1, 0.5, 0]);
+const section2Opacity = useTransform(servicesProgress, [0.3, 0.5, 0.7], [0, 1, 0]);
+const section3Opacity = useTransform(servicesProgress, [0.6, 0.8, 1], [0, 1, 1]);
 
-  const section1Y = useTransform(servicesProgress, [0, 0.4], [0, -50]);
-  const section2Y = useTransform(servicesProgress, [0.4, 1], [50, 0]);
+const section1Y = useTransform(servicesProgress, [0, 0.4], [0, -50]);
+const section2Y = useTransform(servicesProgress, [0.3, 0.7], [50, -50]);
+const section3Y = useTransform(servicesProgress, [0.6, 1], [50, 0]);
 
   return (
     <div >
@@ -88,9 +90,15 @@ export default function Home() {
           >
             <h2>Full-Stack Development</h2>
             <p>
-              I build scalable web applications using modern technologies like React,
-              Next.js, and Node.js.
+             I build scalable, end-to-end web applications that seamlessly connect intuitive frontends with robust backend systems, 
+             ensuring performance, reliability, and maintainability across the entire stack.
             </p>
+            <ul>
+              <li>Develop modern web apps using React, Next.js, and TypeScript</li>
+              <li>Build APIs and server-side logic with Node.js, Express, and GraphQL</li>
+              <li>Implement cloud infrastructure and deployments (AWS, Azure, DigitalOcean)</li>
+              <li>Ensure clean architecture, scalability, and long-term maintainability</li>
+            </ul>
           </motion.div>
 
           {/* SECTION 2 */}
@@ -100,9 +108,34 @@ export default function Home() {
           >
             <h2>UI/UX & Frontend</h2>
             <p>
-              I design and develop intuitive user interfaces with smooth animations
-              and clean user experiences.
+              I create responsive, user-focused interfaces that balance aesthetics and usability, delivering seamless digital experiences across devices.
             </p>
+            <ul>
+              Build reusable UI components with Tailwind CSS, Chakra UI, Styled Components, and Sass
+              Develop responsive, accessible layouts using HTML5, CSS3, and modern JavaScript
+              Structure scalable and maintainable styles using Sass and component-based architecture
+              Focus on performance, accessibility, and intuitive user interactions
+              Translate design concepts into polished, production-ready interfaces
+              Enhance user experience through smooth animations and micro-interactions
+            </ul>
+          </motion.div>
+           {/* SECTION 3 */}
+          <motion.div 
+            className={styles.serviceBlock}
+            style={{ opacity: section3Opacity, y: section3Y }}
+          >
+            <h2>Marketing & Analytics</h2>
+            <p>
+              I leverage data, tracking, and marketing technologies to uncover insights, measure performance, and drive meaningful user engagement and conversion improvements.
+            </p>
+            <ul>
+              Implement tracking systems using Google Tag Manager and Google Analytics 4
+              Analyze user behavior and journeys with FullStory and Looker Studio
+              Build dashboards and reports to translate data into actionable insights
+              Integrate marketing and CMS platforms like Contentstack, WordPress, and Marketo
+              Support A/B testing, funnel optimization, and conversion tracking strategies
+              Collaborate with marketing teams to align data with business and growth goals
+            </ul>
           </motion.div>
 
         </div>
