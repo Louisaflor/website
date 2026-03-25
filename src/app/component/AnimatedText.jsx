@@ -1,6 +1,6 @@
 "use client"; 
 import React, {useRef} from 'react';
-import styles from '../page.module.scss'
+import styles from '../../../styles/page.module.scss'
 import { motion, useInView } from 'framer-motion';
 
 export default function AnimatedText({ el: Wrapper = 'p', text, className, once }) {
@@ -10,7 +10,7 @@ export default function AnimatedText({ el: Wrapper = 'p', text, className, once 
   const defaultAnimation= {
      hidden: {
       opacity: 0,
-      y: 50
+      y: 150
      },
      visible: {
       opacity: 1,
@@ -22,23 +22,32 @@ export default function AnimatedText({ el: Wrapper = 'p', text, className, once 
   }
 
   return (
-    <Wrapper className={className}>
-      <motion.span 
-      initial="hidden" 
-      animate={isInView ? 'visible' : 'hidden'}
-      transition={{staggerChildren: 0.08}}
-      ref={ref}
-      >
-        {animateText.map((word, index) => (
-          <span key={index} className={styles.textSpan}>
-            {word.split('').map((char, i) => (
-              <motion.span className={styles.textSpan} variants={defaultAnimation} key={i}>{char}</motion.span>
-            ))}
-            {(index !== animateText.length - 1) && <span className={styles.textSpan}>&nbsp;</span>}
-          </span> 
-        ))}
-        
-      </motion.span>
-    </Wrapper>
+    <div>
+      <Wrapper className={className}>
+        <motion.span 
+        initial="hidden" 
+        animate={isInView ? 'visible' : 'hidden'}
+        transition={{staggerChildren: 0.08}}
+        ref={ref}
+        >
+          {animateText.map((word, index) => (
+            <span key={index} className={styles.textSpan}>
+              {word.split('').map((char, i) => (
+                <motion.span className={styles.textSpan} variants={defaultAnimation} key={i}>{char}</motion.span>
+              ))}
+              {(index !== animateText.length - 1) && <span className={styles.textSpan}>&nbsp;</span>}
+            </span> 
+          ))}
+          
+        </motion.span>
+      </Wrapper>
+       {/* <motion.div
+          initial={{ opacity: 0, y: 200 }}   
+          animate={{ opacity: 1, y: 0 }}    
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          Louisa Yonzon
+        </motion.div> */}
+    </div>
   );
 }

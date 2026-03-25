@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inconsolata } from "next/font/google";
 import "./globals.scss";
 import Navigation from "./component/Navigation";
 
@@ -9,6 +9,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const inconsolata = Inconsolata({
+  variable: "--font-inconsolata",
   subsets: ["latin"],
 });
 
@@ -23,7 +28,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.png" sizes="any" />
       </head>
-      <body>
+      <body className={`${inconsolata.className}`}>
         <Navigation />
         {children}
       </body>

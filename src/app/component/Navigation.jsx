@@ -1,9 +1,9 @@
 "use client"; 
 import React from 'react';
-import styles from '../page.module.scss'
+import styles from '../../../styles/page.module.scss'
 
 export default function Navigation() {
-    let pages = ['About', 'Experienecs', 'Projects']
+    let pages = ['About', 'Experienecs', 'Projects', 'Contact']
   return (
     <div className={styles.nav}>
         <p className={styles.name}>Louisa Yonzon</p>
