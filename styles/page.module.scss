@@ -120,4 +120,36 @@ padding-top: 50px;
   min-height: 100vh;
 }
 
+.servicesWrapper {
+  height: 250vh; // controls how long the section "holds"
+  position: relative;
+}
+
+.servicesSticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  background: #fff;
+}
+
+.servicesHeader {
+  font-size: 60px;
+  margin-bottom: 40px;
+}
+
+.servicesContent {
+  position: relative;
+  height: 200px;
+}
+
+.serviceBlock {
+  position: absolute;
+  width: 100%;
+}
+
 

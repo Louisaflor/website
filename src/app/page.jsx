@@ -31,6 +31,20 @@ export default function Home() {
   const smoothY = useSpring(aboutY, { stiffness: 100, damping: 20 });
   const smoothScale = useSpring(aboutScale, { stiffness: 100, damping: 20 });
 
+  const servicesRef = useRef(null);
+
+  const { scrollYProgress: servicesProgress } = useScroll({
+    target: servicesRef,
+    offset: ["start start", "end end"],
+  });
+
+  // split scroll into 2 phases
+  const section1Opacity = useTransform(servicesProgress, [0, 0.4], [1, 0]);
+  const section2Opacity = useTransform(servicesProgress, [0.4, 1], [0, 1]);
+
+  const section1Y = useTransform(servicesProgress, [0, 0.4], [0, -50]);
+  const section2Y = useTransform(servicesProgress, [0.4, 1], [50, 0]);
+
   return (
     <div >
       <section ref={ref} className={styles.main}>
@@ -58,12 +72,42 @@ export default function Home() {
           </div>
         </motion.div>
       </motion.section>
-      <section className={styles.experience}>
-        <div>
-           Wht do I do?
+      <section ref={servicesRef} className={styles.servicesWrapper}>
+      <div className={styles.servicesSticky}>
+
+        <div className={styles.servicesHeader}>
+          What I do
         </div>
 
-      </section>
+        <div className={styles.servicesContent}>
+          
+          {/* SECTION 1 */}
+          <motion.div 
+            className={styles.serviceBlock}
+            style={{ opacity: section1Opacity, y: section1Y }}
+          >
+            <h2>Full-Stack Development</h2>
+            <p>
+              I build scalable web applications using modern technologies like React,
+              Next.js, and Node.js.
+            </p>
+          </motion.div>
+
+          {/* SECTION 2 */}
+          <motion.div 
+            className={styles.serviceBlock}
+            style={{ opacity: section2Opacity, y: section2Y }}
+          >
+            <h2>UI/UX & Frontend</h2>
+            <p>
+              I design and develop intuitive user interfaces with smooth animations
+              and clean user experiences.
+            </p>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
     </div>
   );
 }
