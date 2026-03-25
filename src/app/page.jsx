@@ -5,20 +5,26 @@ import { useRef } from "react";
 import styles from '../../styles/page.module.scss'
 import AnimatedText from "./component/AnimatedText";
 import CustomTypewriter from "./component/CustomTypewriter";
+import ElementScrollTest from './component/ElementScrollTest'
 
 
 export default function Home() {
   const ref = useRef(null);
+  const aboutRef = useRef(null);
+  const servicesRef = useRef(null);
+
+  //this is for the top of the page
   const { scrollYProgress: mainScroll } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
+  //smoother transition
   const y = useTransform(mainScroll, [0, 0.5], [0, -15]);
   const scale = useTransform(mainScroll, [0, 0.5], [1, 0.95]);
   const opacity = useTransform(mainScroll, [0, 0.5], [1, 0]);
 
-   const aboutRef = useRef(null);
+  // this is for the about section
    const {scrollYProgress} = useScroll({
     target: aboutRef,
     offset: ["start start", "end start"],
@@ -31,21 +37,21 @@ export default function Home() {
   const smoothY = useSpring(aboutY, { stiffness: 100, damping: 20 });
   const smoothScale = useSpring(aboutScale, { stiffness: 100, damping: 20 });
 
-  const servicesRef = useRef(null);
-
+  
+  //this is for the services section
   const { scrollYProgress: servicesProgress } = useScroll({
     target: servicesRef,
     offset: ["start start", "end end"],
   });
 
   // smoother overlapping transitions
-const section1Opacity = useTransform(servicesProgress, [0, 0.3, 0.4], [1, 0.5, 0]);
-const section2Opacity = useTransform(servicesProgress, [0.3, 0.5, 0.7], [0, 1, 0]);
-const section3Opacity = useTransform(servicesProgress, [0.6, 0.8, 1], [0, 1, 1]);
+  const section1Opacity = useTransform(servicesProgress, [0, 0.3, 0.4], [1, 0.5, 0]);
+  const section2Opacity = useTransform(servicesProgress, [0.3, 0.5, 0.7], [0, 1, 0]);
+  const section3Opacity = useTransform(servicesProgress, [0.6, 0.8, 1], [0, 1, 1]);
 
-const section1Y = useTransform(servicesProgress, [0, 0.4], [0, -50]);
-const section2Y = useTransform(servicesProgress, [0.3, 0.7], [50, -50]);
-const section3Y = useTransform(servicesProgress, [0.6, 1], [50, 0]);
+  const section1Y = useTransform(servicesProgress, [0, 0.4], [0, -50]);
+  const section2Y = useTransform(servicesProgress, [0.3, 0.7], [50, -50]);
+  const section3Y = useTransform(servicesProgress, [0.6, 1], [50, 0]);
 
   return (
     <div >
@@ -137,7 +143,7 @@ const section3Y = useTransform(servicesProgress, [0.6, 1], [50, 0]);
               Collaborate with marketing teams to align data with business and growth goals
             </ul>
           </motion.div>
-
+          
         </div>
       </div>
     </section>

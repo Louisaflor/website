@@ -1,0 +1,192 @@
+🧠 Framer Motion Cheat Sheet (Next.js + Scroll Storytelling)
+🔹 1. Core Hooks You’ll Actually Use
+useScroll()
+
+Tracks scroll position and progress.
+
+const { scrollY, scrollYProgress } = useScroll();
+Values:
+scrollY → raw pixel scroll (0 → ∞)
+scrollYProgress → normalized (0 → 1)
+✅ With target + offset (SUPER IMPORTANT)
+const ref = useRef();
+
+const { scrollYProgress } = useScroll({
+  target: ref,
+  offset: ["start end", "end start"]
+});
+Offset Cheat Sheet:
+Value	Meaning
+"start end"	element enters viewport
+"end start"	element leaves viewport
+"start start"	top hits top
+"end end"	bottom hits bottom
+
+👉 Think of it as:
+
+[target position] [viewport position]
+🔹 2. Transforming Values
+useTransform()
+
+Maps one value → another
+
+const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+Examples:
+// Fade in
+useTransform(progress, [0, 0.5], [0, 1])
+
+// Scale down slightly
+useTransform(progress, [0, 1], [1, 0.9])
+
+// Move up
+useTransform(progress, [0, 1], [100, 0])
+
+// Rotate
+useTransform(progress, [0, 1], [0, 360])
+💡 Multi-step animations
+useTransform(progress, [0, 0.5, 1], [0, 1, 0])
+🔹 3. Smooth Animations
+useSpring()
+
+Adds easing / natural motion
+
+const smooth = useSpring(value, {
+  stiffness: 100,
+  damping: 20
+});
+
+👉 Use this on:
+
+scroll values
+transforms (scale, y, opacity)
+🔹 4. Motion Components
+Replace HTML elements:
+<motion.div />
+<motion.section />
+<motion.img />
+🔹 5. Key Props You’ll Use Constantly
+initial
+
+Starting state
+
+initial={{ opacity: 0, y: 50 }}
+animate
+
+End state
+
+animate={{ opacity: 1, y: 0 }}
+whileInView
+
+🔥 Best for scroll-triggered animations
+
+whileInView={{ opacity: 1, y: 0 }}
+viewport
+
+Control when it triggers
+
+viewport={{ once: true, amount: 0.5 }}
+Option	Meaning
+once	animate only once
+amount	% visible before trigger
+🔹 6. Transition Control
+transition={{
+  duration: 0.8,
+  ease: "easeOut",
+  delay: 0.2
+}}
+Common easing:
+"easeIn"
+"easeOut"
+"easeInOut"
+"linear"
+🔹 7. Scroll Storytelling Pattern (IMPORTANT)
+
+This is your main pattern 👇
+
+const ref = useRef();
+
+const { scrollYProgress } = useScroll({
+  target: ref,
+  offset: ["start end", "end start"]
+});
+
+const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
+<section ref={ref}>
+  <motion.div style={{ opacity, y }}>
+    Content
+  </motion.div>
+</section>
+🔹 8. Useful Motion Values
+
+You can animate ANY of these:
+
+Layout / Position
+x
+y
+top, left
+translateX, translateY
+Scale
+scale
+scaleX
+scaleY
+Rotation
+rotate
+rotateX
+rotateY
+Opacity
+opacity
+Styling
+backgroundColor
+color
+borderRadius
+🔹 9. Advanced Hooks (Optional but Powerful)
+useMotionValue()
+
+Manual control
+
+const x = useMotionValue(0);
+useVelocity()
+
+Track speed
+
+const velocity = useVelocity(scrollY);
+useMotionValueEvent()
+
+Listen to changes
+
+useMotionValueEvent(scrollY, "change", (latest) => {
+  console.log(latest);
+});
+🔹 10. Common Patterns for Portfolios
+✨ Fade + Slide In
+{ opacity: [0 → 1], y: [50 → 0] }
+✨ Parallax
+y: useTransform(progress, [0, 1], [-100, 100])
+✨ Sticky Scroll Sections
+Use position: sticky
+Animate children with scrollYProgress
+✨ Text Reveal
+animate opacity + y
+or clip-path / mask
+🔹 11. Common Mistakes (YOU already hit one)
+❌ This:
+style={{ y: someTransform }}
+
+If it shows:
+
+y: [object Object]
+
+👉 Usually means:
+
+you're mixing raw values + motion values incorrectly
+OR not using motion.div
+✅ Fix:
+<motion.div style={{ y }}>
+🔹 12. Mental Model (THIS unlocks everything)
+
+Think of Framer Motion like:
+
+scroll → progress (0 → 1)
+progress → mapped values (useTransform)
+mapped values → styles
