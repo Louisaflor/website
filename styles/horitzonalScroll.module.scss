@@ -1,0 +1,27 @@
+.wrapper {
+    height: 400vh; // 4 panels → 4 * 100vh
+    position: relative;
+  }
+  
+  .inner {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+  }
+  
+  .panel {
+    min-width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    background: #111;
+    color: white;
+    border-right: 1px solid #333;
+  }
+  
+  .panel2 {
+    background-color: aqua;
+  }
