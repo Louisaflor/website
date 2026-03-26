@@ -70,22 +70,26 @@ export default function Home() {
     <section>
       <motion.div className={styles.mainWrapper} > 
         <motion.div
-         initial={{ height: "100vh"  }}
+         initial={{ height: "150vh"  }}
          animate={{ height: "0vh"}}
-        //  transition={{ duration: 0.8, ease: "easeInOut"  }}
-        transition={{ type: "spring", stiffness: 200, damping: 15, duration: 5 }} 
+        transition={{ type: "spring", stiffness: 80, damping: 20 }} 
          style={{ overflow: "hidden" }}
         className={styles.entrance}
         onAnimationComplete={() => setDisplayText(true)}>
-          hello entrance
+          <div className={styles.archWrapper}>
+            <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"  style={{ width: "100%", height: "100%", display: "block" }}>
+              <path d="M0,88 Q50,60 100,88 V100 H0 Z" fill="#ede5d5"/>
+            </svg>
+          </div>
+         
+
         </motion.div>
         <section ref={ref} className={styles.main}>
           <motion.div className={styles.header} style={{ opacity, y, scale }} >
           {displayText && <div className={styles.title}>
-            <CustomTypewriter text="Hi there! My name is Louisa Yonzon" /> 
+            <CustomTypewriter text="Hello World" /> 
             <p className={styles.scrollDown} >Scroll down to continue</p>
           </div>}
-          
           </motion.div>
         </section>
 

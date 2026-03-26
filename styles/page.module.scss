@@ -15,12 +15,46 @@
 .entrance {
   height: 100vh;
   width: 100vw;
-  background-color: aliceblue;
+  background-color: #3d2d2c;
   position: absolute;
   top: 0;
-  z-index: 100;
-  height: 10px;
+  left: 0;
+  overflow: hidden;
+  z-index: 100; 
+  border-bottom: none;
 } 
+
+.archWrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80vh;
+  pointer-events: none;
+  border-bottom: none;
+}
+
+.archWrapper svg {
+  // width: 100%;
+  // height: 100%;
+  display: block;
+}
+
+// .entrance::after {
+//   content: '';
+//   position: relative;
+//   bottom: -100px; /* position it below the bottom edge */
+//   left: 0;
+  
+//   z-index: 10;
+// }
+
+.arch {
+  position: relative;
+  // width: 100%;
+  // height: 100px; /* size of the pseudo-element */
+  // background-color: #ede5d5; /* Color of the page background or next section */
+  // border-radius: 50% 50% 0 0; /* creates the arch shape */
+}
 
 
 .main {
