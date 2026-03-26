@@ -68,12 +68,12 @@ export default function Home() {
   return (
     <>
     <section>
-      <motion.div className={styles.mainWrapper} >
+      <motion.div className={styles.mainWrapper} > 
         <motion.div
          initial={{ height: "100vh"  }}
          animate={{ height: "0vh"}}
         //  transition={{ duration: 0.8, ease: "easeInOut"  }}
-        transition={{ type: "spring", stiffness: 200, damping: 15, duration: 1 }} 
+        transition={{ type: "spring", stiffness: 200, damping: 15, duration: 5 }} 
          style={{ overflow: "hidden" }}
         className={styles.entrance}
         onAnimationComplete={() => setDisplayText(true)}>
