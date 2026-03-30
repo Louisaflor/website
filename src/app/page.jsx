@@ -6,7 +6,7 @@ import { useRef } from "react";
 import styles from '../../styles/page.module.scss'
 import AnimatedText from "./component/AnimatedText";
 import CustomTypewriter from "./component/CustomTypewriter";
-import HorizontalScrollSection from "./component/HorizontalScroll";
+// import HorizontalScrollSection from "./component/HorizontalScroll";
 
 
 export default function Home() {
@@ -62,8 +62,8 @@ export default function Home() {
   const section3Opacity = useTransform(servicesProgress, [0.6, 0.8, 1], [0, 1, 1]);
 
   const section1Y = useTransform(servicesProgress, [0, 0.4], [0, -50]);
-  const section2Y = useTransform(servicesProgress, [0.3, 0.7], [50, -50]);
-  const section3Y = useTransform(servicesProgress, [0.6, 1], [50, 0]);
+  const section2Y = useTransform(servicesProgress, [0.1, 0.4], [550, -550]);
+  const section3Y = useTransform(servicesProgress, [0.2, 0.9], [550, -1160]);
 
   return (
     <>
@@ -72,7 +72,7 @@ export default function Home() {
         <motion.div
          initial={{ height: "150vh"  }}
          animate={{ height: "0vh"}}
-        transition={{ type: "spring", stiffness: 80, damping: 20 }} 
+        transition={{ type: "spring", stiffness: 90, damping: 45 }} 
          style={{ overflow: "hidden" }}
         className={styles.entrance}
         onAnimationComplete={() => setDisplayText(true)}>
@@ -87,7 +87,7 @@ export default function Home() {
         <section ref={ref} className={styles.main}>
           <motion.div className={styles.header} style={{ opacity, y, scale }} >
           {displayText && <div className={styles.title}>
-            <CustomTypewriter text="Hello World" /> 
+            <CustomTypewriter text="Hi there! My name is Louisa Yonzon" /> 
             <p className={styles.scrollDown} >Scroll down to continue</p>
           </div>}
           </motion.div>
@@ -104,7 +104,7 @@ export default function Home() {
               </div>
               <div>
                 Nice to meet you! I'm a frontend developer based in San Diego — and yes, I actually made the switch from healthcare! 
-                I went from scheduling patients and navigating insurance calls to building websites, creating email templates, and setting up analytics to improve how our sites perform. 
+                I went from scheduling patients and navigating insurance calls to building websites, creating email templates, and setting up analytics to help improve how our sites perform. 
                 Somewhere along the way I realized I love solving problems and picking up new skills, and this career lets me do both every day. When I'm not coding you'll catch me trail running, hiking at a national park, or hunting down a good restaurant. I've ran 8 marathons, 2 ultra marathons, and I'm currently training for my first Ironman so I'm no stranger to putting in the work. 
               </div>
             </div>
@@ -121,8 +121,8 @@ export default function Home() {
               <div className={styles.servicesContent}>
                 {/* SECTION 1 */}
                 <motion.div 
-                  className={styles.serviceBlock}
-                  style={{ opacity: section1Opacity, y: section1Y }}
+                  className={`${styles.serviceBlock} ${styles.block1}`}
+                  // style={{ y: section1Y }}
                 >
                   <h2>Full-Stack Development</h2>
                   <p>
@@ -139,26 +139,28 @@ export default function Home() {
 
                 {/* SECTION 2 */}
                 <motion.div 
-                  className={styles.serviceBlock}
-                  style={{ opacity: section2Opacity, y: section2Y }}
+                  className={styles.section2Block}
+                  style={{ y: section2Y }}
                 >
-                  <h2>UI/UX & Frontend</h2>
-                  <p>
-                    I create responsive, user-focused interfaces that balance aesthetics and usability, delivering seamless digital experiences across devices.
-                  </p>
-                  <ul>
-                    <li>Build reusable UI components with Tailwind CSS, Chakra UI, Styled Components, and Sass</li>
-                    <li>Develop responsive, accessible layouts using HTML5, CSS3, and modern JavaScript</li>
-                    <li>Structure scalable and maintainable styles using Sass and component-based architecture</li>
-                    <li>Focus on performance, accessibility, and intuitive user interactions</li>
-                    <li>Translate design concepts into polished, production-ready interfaces</li>
-                    <li>Enhance user experience through smooth animations and micro-interactions</li>
-                  </ul>
+                  <div className={`${styles.serviceBlock} ${styles.block2}`}>
+                    <h2>UI/UX & Frontend</h2>
+                    <p>
+                      I create responsive, user-focused interfaces that balance aesthetics and usability, delivering seamless digital experiences across devices.
+                    </p>
+                    <ul>
+                      <li>Build reusable UI components with Tailwind CSS, Chakra UI, Styled Components, and Sass</li>
+                      <li>Develop responsive, accessible layouts using HTML5, CSS3, and modern JavaScript</li>
+                      <li>Structure scalable and maintainable styles using Sass and component-based architecture</li>
+                      <li>Focus on performance, accessibility, and intuitive user interactions</li>
+                      <li>Translate design concepts into polished, production-ready interfaces</li>
+                      <li>Enhance user experience through smooth animations and micro-interactions</li>
+                    </ul>
+                  </div>
                 </motion.div>
                 {/* SECTION 3 */}
                 <motion.div 
-                  className={styles.serviceBlock}
-                  style={{ opacity: section3Opacity, y: section3Y }}
+                  className={`${styles.serviceBlock} ${styles.block3}`}
+                  style={{ y: section3Y }}
                 >
                   <h2>Marketing & Analytics</h2>
                   <p>

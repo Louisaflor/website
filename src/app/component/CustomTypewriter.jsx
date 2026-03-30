@@ -1,7 +1,7 @@
 'use client'; // Required for client-side hooks and interactive components in Next.js App Router
 import React, { useState, useEffect } from 'react';
 
-const CustomTypewriter = ({ text, speed = 100 }) => {
+const CustomTypewriter = ({ text, speed = 80 }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
