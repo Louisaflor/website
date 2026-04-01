@@ -184,7 +184,7 @@ padding-top: 50px;
 }
 
 .servicesWrapper {
-  height: 250vh; // controls how long the section "holds"
+  height: 350vh; // controls how long the section "holds"
   min-width: 100vw;
   position: relative;
 }
@@ -212,7 +212,7 @@ padding-top: 50px;
 }
 
 .serviceBlock {
-  position: sticky;
+  position: relative;
   width: 100%;
   margin-bottom: 20em;
   background-color: white;
@@ -235,4 +235,75 @@ padding-top: 50px;
   font-size: 30px;
   margin-left: 40px;
 }
+
+.section2Block,
+.block3 {
+  will-change: transform;
+}
+
+//selected work
+.selectedWork {
+  height: 500vh;
+  position: relative;
+}
+
+.grid {
+  display: grid;
+   grid-template-columns: 1fr 2fr;
+}
+
+.left {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.counterWrapper {
+  display: flex;
+  font-size: 20vw;
+  line-height: 0.8;
+}
+
+.leading {
+  opacity: 0.3;
+}
+
+.viewport {
+  height: 1em;
+  position: relative;
+}
+
+.track {
+  display: flex;
+  flex-direction: column;
+}
+
+.track > span {
+  display: inline-block;
+}
+
+.track span {
+  height: 1em;
+}
+
+/* RIGHT SIDE */
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* EACH PROJECT */
+.project {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 50px;
+
+  font-size: 40px;
+}
+
 

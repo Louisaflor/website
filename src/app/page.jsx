@@ -1,8 +1,8 @@
 'use client'
 import Image from "next/image";
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
+import Lenis from '@studio-freight/lenis'
 import styles from '../../styles/page.module.scss'
 import AnimatedText from "./component/AnimatedText";
 import CustomTypewriter from "./component/CustomTypewriter";
@@ -15,6 +15,61 @@ export default function Home() {
   const ref = useRef(null);
   const aboutRef = useRef(null);
   const servicesRef = useRef(null);
+  const projectRefs = useRef([]);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const projects = [
+    { title: "Project One" },
+    { title: "Project Two" },
+    { title: "Project Three" },
+    { title: "Project Four" },
+    { title: "Project Five" },
+  ];
+
+  // detect which project is centered
+  useEffect(() => {
+    const handleScroll = () => {
+      projectRefs.current.forEach((el, i) => {
+        if (!el) return;
+
+        const rect = el.getBoundingClientRect();
+
+        if (
+          rect.top < window.innerHeight * 0.5 &&
+          rect.bottom > window.innerHeight * 0.5
+        ) {
+          setCurrentIndex(i);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+   // smooth animated index
+  const motionIndex = useSpring(currentIndex, {
+    stiffness: 80,
+    damping: 20,
+  });
+
+   // translateY for number reel
+  const projectsY = useTransform(motionIndex, (i) => `${-i * 100}%`);
+
+
+  useEffect(() => {
+  const lenis = new Lenis({
+    lerp: 0.08, // smoothness
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+}, []);
 
   //this is for the entire page to make it scroll vertically and tracking to scroll for the div
   const {scrollYProgress: entirePageScroll} = useScroll({
@@ -56,14 +111,20 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  // smoother overlapping transitions
-  const section1Opacity = useTransform(servicesProgress, [0, 0.3, 0.4], [1, 0.5, 0]);
-  const section2Opacity = useTransform(servicesProgress, [0.3, 0.5, 0.7], [0, 1, 0]);
-  const section3Opacity = useTransform(servicesProgress, [0.6, 0.8, 1], [0, 1, 1]);
+ 
 
-  const section1Y = useTransform(servicesProgress, [0, 0.4], [0, -50]);
-  const section2Y = useTransform(servicesProgress, [0.1, 0.4], [550, -550]);
-  const section3Y = useTransform(servicesProgress, [0.2, 0.9], [550, -1160]);
+  const section2Y = useTransform(servicesProgress, [0.1, 0.5], [570, -565]);
+  const section3Y = useTransform(servicesProgress, [0.3, 0.8], [1270, -1195]);
+
+  const smoothSection2Y = useSpring(section2Y, {
+  stiffness: 80,
+  damping: 25,
+});
+
+const smoothSection3Y = useSpring(section3Y, {
+  stiffness: 80,
+  damping: 25,
+});
 
   return (
     <>
@@ -140,7 +201,7 @@ export default function Home() {
                 {/* SECTION 2 */}
                 <motion.div 
                   className={styles.section2Block}
-                  style={{ y: section2Y }}
+                  style={{ y: smoothSection2Y }}
                 >
                   <div className={`${styles.serviceBlock} ${styles.block2}`}>
                     <h2>UI/UX & Frontend</h2>
@@ -160,7 +221,7 @@ export default function Home() {
                 {/* SECTION 3 */}
                 <motion.div 
                   className={`${styles.serviceBlock} ${styles.block3}`}
-                  style={{ y: section3Y }}
+                  style={{ y: smoothSection3Y }}
                 >
                   <h2>Marketing & Analytics</h2>
                   <p>
@@ -179,8 +240,37 @@ export default function Home() {
               </div>
             </div>
           </section>
+          <section className={styles.selectedWork}>
+            <div className={styles.grid}>
+              <div className={styles.left}>
+                <span className={styles.counterWrapper}>
+                  <span className={styles.leading}>0</span>
+                  <div className={styles.viewport}>
+                    <motion.div className={styles.track} style={{ y: projectsY }}>
+                      {projects.map((_, i) => (
+                        <span key={i}>
+                          {i + 1}
+                        </span>
+                      ))}
+                    </motion.div>
+                  </div>
+                </span>
+              </div>
+
+              <div className={styles.right}>
+                {projects.map((project, i) => (
+                  <div key={i} ref={(el) => (projectRefs.current[i] = el)} className={styles.project}>
+                    <div> {project.title} </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
       </motion.div>
     </section>
+    
     </>
   );
 }
+
+

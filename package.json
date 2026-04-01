@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
     "eslint-config-next": "^16.2.1",
     "framer-motion": "^12.11.0",
     "motion": "^12.11.0",
